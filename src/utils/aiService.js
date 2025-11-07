@@ -12,7 +12,7 @@ export const generateQuiz = async (quizParams) => {
 
     console.log("Generating quiz with Gemini AI for:", quizParams);
 
-    // Build prompt
+    
     const prompt = `
 You are an expert quiz generator. Create ${questionCount} multiple-choice questions for the subject "${subject}" targeting ${educationLevel} level. 
 Focus on the topic(s): ${topics || 'general concepts'}.
@@ -35,12 +35,12 @@ Respond in JSON format as an array named "questions". Example format:
 }
     `;
 
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
     const result = await model.generateContent(prompt);
     const response = result.response;
     const text = response.text();
 
-    // Extract JSON from response
+   
     const match = text.match(/\{[\s\S]*\}/);
     if (!match) {
       console.error("Invalid AI response format:", text);
